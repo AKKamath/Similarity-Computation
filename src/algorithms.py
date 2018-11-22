@@ -31,10 +31,10 @@ def pearson_correlation_distance(a, b):
 	return 1 - float(numerator) / float(denominator)
 
 def simple_matching_coefficient(a, b):
-	m00 = sum(~int(x) & ~int(y) for x, y in zip(a, b))
-	m01 = sum(~int(x) & int(y) for x, y in zip(a, b))
-	m10 = sum(int(x) & ~int(y) for x, y in zip(a, b))
-	m11 = sum(int(x) & int(y) for x, y in zip(a, b))
+	m00 = sum(not int(x) and not int(y) for x, y in zip(a, b))
+	m01 = sum(not int(x) and int(y) for x, y in zip(a, b))
+	m10 = sum(int(x) and not int(y) for x, y in zip(a, b))
+	m11 = sum(int(x) and int(y) for x, y in zip(a, b))
 	
 	if(float(m00 + m01 + m10 + m11) == 0):
 		return "Divide by zero error"
@@ -42,9 +42,9 @@ def simple_matching_coefficient(a, b):
 	return float(m00 + m11) / float(m00 + m01 + m10 + m11)
 
 def jaccard_coefficient(a, b):
-	m01 = sum(~int(x) & int(y) for x, y in zip(a, b))
-	m10 = sum(int(x) & ~int(y) for x, y in zip(a, b))
-	m11 = sum(int(x) & int(y) for x, y in zip(a, b))
+	m01 = sum(not int(x) and int(y) for x, y in zip(a, b))
+	m10 = sum(int(x) and not int(y) for x, y in zip(a, b))
+	m11 = sum(int(x) and int(y) for x, y in zip(a, b))
 	
 	if(float(m01 + m10 + m11) == 0):
 		return "Divide by zero error"
